@@ -14,10 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.conf.urls import include
+from django.conf.urls import include	# This is the module which import to forward request to apps based url.py
 from django.contrib import admin
 
 urlpatterns = [
+ 
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('profiles_api.urls'))
+
+    # Below will forward the request to /opt/django_project/profile-rest-api/src/profiles_project/profiles_api/views.py 
+    # When there is a query landed on url : http://rhceclient01.svr.apac.sathsang.net:8080/api/ """
+    url(r'^api/', include('profiles_api.urls'))	
 ]
