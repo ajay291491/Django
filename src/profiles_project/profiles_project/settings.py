@@ -25,7 +25,8 @@ SECRET_KEY = '_l(*v@iu9qdfnr=1#&b19@!*u^tsiw#s^k%zyjs9l^u)v83@xj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '192.168.122.42', 'rhceclient01.svr.apac.sathsang.net',]
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '192.168.122.42',
+                 'rhceclient01.svr.apac.sathsang.net', 'djangorestapi01.svr.apac.sathsang.net']
 
 
 # Application definition

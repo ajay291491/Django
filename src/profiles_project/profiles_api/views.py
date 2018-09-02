@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
 from rest_framework.views import APIView		# This imports the APIView class from the django rest_framework views 
-from rest_framework.response import Response		# This will process output which we need to return in JSON format with status codes 
-from rest_framework import status			# This will help to return a status code for for API
+from rest_framework.response import Response	# This will process output which we need to return in JSON format with status codes
+from rest_framework import status			    # This will help to return a status code for for API
+
+from rest_framework import viewsets              # This module will take care of the Viewset operations
 
 from . import serializers
 
@@ -30,9 +32,13 @@ class HelloApiView(APIView):
             'Son'      : 'Rishi Krishna A',
         }
 
+        fstab_file = open('/etc/fstab', 'r')
+        content = fstab_file.readlines()
+
 
         # response has to be always send it a dictionary format, for that we will associate our list with a key as seen below 
-        return Response({'Message' : 'Hello, welcome to Ajay\'s first api endpoint', 'an_apiview': an_apiview, 'family_details' : family_details })
+        #return Response({'Message' : 'Hello, welcome to Ajay\'s first api endpoint', 'an_apiview': an_apiview, 'family_details' : family_details , 'fstab' : content})
+        return Response({'fstab contents' : content})
 
     def post(self, request):
         """ This will return the same name which is getting pasted """
@@ -47,3 +53,33 @@ class HelloApiView(APIView):
             return Response({'message': message})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) # This will retun error and HTTP status code using Response module
+
+    def put(self, request, pk=None):
+        """ This method will help to update an object """
+
+        return Response({"message" : "You have used the put method"})
+
+    def patch(self, request, pk=None):
+        """ This method will help to update few fields in the object """
+
+        return Response({"message": "You have used the patch method"})
+
+    def delete(self, request, pk=None):
+        """ This methhod will help to delete an object """
+
+        return Response({"message" : "This method will delete an object"})
+
+        
+
+class HellowViewSet(viewsets.ViewSet):
+    """Test Hello Viewset"""
+
+    def list (self, request):
+        """Return a Hello Message"""
+        a_viewset = [
+            "Uses actions (list, create, retrieve, update, partial_update",
+            "Automatically maps URLs using routers",
+            "Provide more functionality with less code",
+        ]
+
+        return Response({'message' : 'This is a viewset', 'a_viewset': a_viewset})
